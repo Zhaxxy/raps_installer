@@ -23,7 +23,7 @@
 #include "rap2rif/rap2rif.h"
 #include "rap2rif/tools.h"
 
-#define VERSION_STRING "3.0"
+#define VERSION_STRING "3.1"
 #define VERSION_PRETTY "\nVersion "VERSION_STRING
 
 #define QUIT_THREAD(error) thread_results->finished_yet = true; sysThreadExit(error); return
@@ -39,7 +39,7 @@ struct ThreadResults {
 	char bad_rap_name[2048];
 };
 
-#define FOLDER_TO_CHECK_FOR_RAPS_SIZE 8
+#define FOLDER_TO_CHECK_FOR_RAPS_SIZE 10
 const char FOLDER_TO_CHECK_FOR_RAPS[FOLDER_TO_CHECK_FOR_RAPS_SIZE][32] = {
 	"/dev_hdd0/packages/temp_raps/",
 	"/dev_hdd0/exdata/",
