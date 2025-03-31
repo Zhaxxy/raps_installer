@@ -23,7 +23,7 @@
 #include "rap2rif/rap2rif.h"
 #include "rap2rif/tools.h"
 
-#define VERSION_STRING "2.0"
+#define VERSION_STRING "3.0"
 #define VERSION_PRETTY "\nVersion "VERSION_STRING
 
 #define QUIT_THREAD(error) thread_results->finished_yet = true; sysThreadExit(error); return
@@ -157,15 +157,14 @@ void install_rap_thread(void *arg)
 				thread_results->raps_found++;
 				strncpy(content_id,entry->d_name,(sizeof(content_id)-1));
 				sprintf(rif_output,"%s%s.rif",exdata_folder,content_id);
-				if (stat(rif_output, &stat_buffer) == 0) {
-					continue;
+				if (stat(rif_output, &stat_buffer) != 0) {
+					thread_results->new_raps_installed++;
 				}
 				rap2rif_res = rap2rif(actdat,klist,content_id,thread_results->bad_rap_name,rif_output);
 				if (rap2rif_res != 0) {
 					closedir(dir);
 					QUIT_THREAD(THREAD_ERROR_SOMETHING_WENT_WRONG_RAP2RIF);
 				}
-				thread_results->new_raps_installed++;
 				
 			}
 			closedir(dir);
@@ -212,7 +211,7 @@ int main(int argc,char *argv[])
 	sysThreadJoin(thread_id,&thread_retval);
 	switch (thread_retval) {
 		case 0:
-			snprintf(result_message,sizeof(result_message),"Found %d rap files, installed %d new rap files!"VERSION_PRETTY,thread_results.raps_found,thread_results.new_raps_installed);
+			snprintf(result_message,sizeof(result_message),"Installed %d rap files! Installed %d new rap files!"VERSION_PRETTY,thread_results.raps_found,thread_results.new_raps_installed);
 			dialogType = (msgType)(MSG_DIALOG_NORMAL | MSG_DIALOG_BTN_OK);
 			msgDialogOpen2(dialogType,result_message,dialog_handler,NULL,NULL);
 			break;
