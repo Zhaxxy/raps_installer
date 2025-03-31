@@ -21,7 +21,7 @@ SOURCES		:=	source source/rap2rif
 DATA		:=	data
 INCLUDES	:=	include
 
-TITLE		:=       Install .rap files v1.0: by Zhaxxy
+TITLE		:=       Install .rap files Version 2.0: by Zhaxxy
 APPID		:=       RAPZHAXXY
 CONTENTID	:=       UP0001-$(APPID)_00-0000000000000000
 ICON0		:=       ICON0.PNG

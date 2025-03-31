@@ -23,7 +23,7 @@
 #include "rap2rif/rap2rif.h"
 #include "rap2rif/tools.h"
 
-#define VERSION_STRING "1.0"
+#define VERSION_STRING "2.0"
 #define VERSION_PRETTY "\nVersion "VERSION_STRING
 
 #define QUIT_THREAD(error) thread_results->finished_yet = true; sysThreadExit(error); return
